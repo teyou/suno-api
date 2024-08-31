@@ -3,7 +3,7 @@
   "info": {
     "title": "suno-api",
     "description": "Use API to call the music generation service of Suno.ai and easily integrate it into agents like GPTs.",
-    "version": "1.1.0"
+    "version": "1.1.1"
   },
   "tags": [
     {
@@ -294,6 +294,15 @@
         "description": "",
         "tags": ["default"],
         "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Pagination number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "in": "query",
             "name": "ids",

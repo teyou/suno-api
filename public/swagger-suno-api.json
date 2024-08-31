@@ -144,6 +144,15 @@
         "parameters": [
           {
             "in": "query",
+            "name": "page",
+            "description": "Pagination number",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
             "name": "ids",
             "description": "Audio IDs, separated by commas.",
             "required": true,

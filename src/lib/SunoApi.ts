@@ -340,11 +340,11 @@ class SunoApi {
    * @param songIds An optional array of song IDs to retrieve information for.
    * @returns A promise that resolves to an array of AudioInfo objects.
    */
-  public async get(songIds?: string[]): Promise<AudioInfo[]> {
+  public async get(page = 0, songIds?: string[]): Promise<AudioInfo[]> {
     await this.keepAlive(false);
-    let url = `${SunoApi.BASE_URL}/api/feed/`;
+    let url = `${SunoApi.BASE_URL}/api/feed/v2?is_video_to_song=false&page=${page}`;
     if (songIds) {
-      url = `${url}?ids=${songIds.join(',')}`;
+      url = `${url}&ids=${songIds.join(',')}`;
     }
     logger.info("Get audio status: " + url);
     const response = await this.client.get(url, {
@@ -353,7 +353,8 @@ class SunoApi {
     });
 
     const audios = response.data;
-    return audios.map((audio: any) => ({
+    // console.log(`audios: ${JSON.stringify(audios,null,2)}`)
+    return audios.clips.map((audio: any) => ({
       id: audio.id,
       title: audio.title,
       image_url: audio.image_url,
