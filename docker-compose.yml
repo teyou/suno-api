@@ -1,5 +1,9 @@
 version: '3'
+networks:
+  macvlan_network:
+    external: true
 
+  
 services:
   suno-api:
     build:
@@ -10,3 +14,11 @@ services:
       - ./public:/app/public
     ports:
       - "3000:3000"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped
+    networks:
+      macvlan_network:
+        ipv4_address: 192.168.1.125
